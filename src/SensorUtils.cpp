@@ -83,6 +83,25 @@ double SubSolarLongitude(const vector<double> &sunPosition) {
 
 
 /**
+ * Computes the local solar time for a ground point.
+ *
+ * @author Jesse Mapel
+ *
+ * @param groundPoint The body fixed rectangular positon of the ground point
+ * @param sunPosition The body fixed rectangular positon of the sun
+ *
+ * @return @b double The local solar time in hours
+ */
+double LocalSolarTime(const vector<double> &groundPoint, const vector<double> &sunPosition) {
+   double groundLon = RectangularToLongitude(groundPoint);
+   double sunLon = SubSolarLongitude(sunPosition);
+   double lonDiff = (groundLon - sunLon);
+   // Divide by 15 because each hour is 15 degrees
+   return (lonDiff + 180) / 15;
+}
+
+
+/**
  * Computes the longitude of a rectangular point in -180:180 positive East degrees.
  * If the point is on a pole, then 0 is returned. If the point does not have 3 elements,
  * then a std::invalid_argument exception is thrown

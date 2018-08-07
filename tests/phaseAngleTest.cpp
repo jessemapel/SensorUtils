@@ -71,6 +71,33 @@ TEST(SubSolarLongitude, TestPoint) {
    EXPECT_EQ(45, SubSolarLongitude(sunPosition));
 }
 
+// BEGIN LocalSolarTime TESTS
+
+TEST(LocalSolarTime, Midnight) {
+   std::vector<double> groundPoint{1.0, 0.0, 0.0};
+   std::vector<double> sunPosition{-1.0, 0.0, 0.0};
+   EXPECT_EQ(0, LocalSolarTime(groundPoint, sunPosition));
+}
+
+TEST(LocalSolarTime, Morning) {
+   std::vector<double> groundPoint{1.0, 0.0, 0.0};
+   std::vector<double> sunPosition{0.0, 1.0, 0.0};
+   EXPECT_EQ(6, LocalSolarTime(groundPoint, sunPosition));
+}
+
+TEST(LocalSolarTime, Noon) {
+   std::vector<double> groundPoint{1.0, 0.0, 0.0};
+   std::vector<double> sunPosition{1.0, 0.0, 0.0};
+   EXPECT_EQ(12, LocalSolarTime(groundPoint, sunPosition));
+}
+
+TEST(LocalSolarTime, Evening) {
+   std::vector<double> groundPoint{1.0, 0.0, 0.0};
+   std::vector<double> sunPosition{0.0, -1.0, 0.0};
+   EXPECT_EQ(18, LocalSolarTime(groundPoint, sunPosition));
+}
+
+
 int main(int argc, char **argv) {
    ::testing::InitGoogleTest(&argc, argv);
    return RUN_ALL_TESTS();
