@@ -78,6 +78,25 @@ double PhaseAngle(const std::vector<double> &observerBodyFixedPosition,
  * @return @b double The longitude of the subsolar point in -180:180 positive East degrees
  */
 double SubSolarLongitude(const vector<double> &sunPosition) {
-   double radLon = atan2(sunPosition[1], sunPosition[0]);
+   return RectangularToLongitude(sunPosition);
+}
+
+
+/**
+ * Computes the longitude of a rectangular point in -180:180 positive East degrees.
+ * If the point is on a pole, then 0 is returned. If the point does not have 3 elements,
+ * then a std::invalid_argument exception is thrown
+ *
+ * @author Jesse Mapel
+ *
+ * @param point The body fixed rectangular coordinate of the point
+ *
+ * @return @b double The longitude of the point in -180:180 positive East degrees
+ */
+double RectangularToLongitude(const vector<double> &point) {
+   if (point.size() < 3) {
+      throw invalid_argument("Cannot compute longitude of a point with less than 3 elements");
+   }
+   double radLon = atan2(point[1], point[0]);
    return 180/M_PI * radLon;
 }
