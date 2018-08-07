@@ -5,5 +5,6 @@
 using namespace std;
 
 double PhaseAngle(const vector<double> & instPosition, const vector<double> & sunPosition, const vector<double> & surfaceIntersection);
+double SubSolarLongitude(const vector<double> &sunPosition);
 
 #endif

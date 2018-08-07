@@ -1,6 +1,6 @@
 #include "SensorUtils.h"
 
-#include "math.h" 
+#include "math.h"
 
 #include <vector>
 
@@ -42,27 +42,42 @@ double PhaseAngle(const std::vector<double> &observerBodyFixedPosition,
 
     //convert the surfaceIntersection vector to an arma::vec
     arma::vec surface = arma::zeros<arma::vec>(3);
-    surface = arma::conv_to<arma::vec>::from(surfaceIntersection);    
+    surface = arma::conv_to<arma::vec>::from(surfaceIntersection);
 
-    // Get vector from surface point to observer and normalise it 
+    // Get vector from surface point to observer and normalise it
     arma::vec surfaceToObserver = arma::zeros<arma::vec>(3);
     arma::vec normSurfaceToObserver = arma::zeros<arma::vec>(3);
-    surfaceToObserver = observer - surface; 
+    surfaceToObserver = observer - surface;
     normSurfaceToObserver = arma::normalise(surfaceToObserver);
 
     // Get vector from surface point to sun and normalise it
     arma::vec surfaceToSun = arma::zeros<arma::vec>(3);
     arma::vec normSurfaceToSun = arma::zeros<arma::vec>(3);
-    surfaceToSun = illuminator - surface; 
+    surfaceToSun = illuminator - surface;
     normSurfaceToSun = arma::normalise(surfaceToSun);
 
     double cos_angle=arma::dot(normSurfaceToObserver,normSurfaceToSun);
-   
-    if(cos_angle >= 1.0) return 0.0; 
+
+    if(cos_angle >= 1.0) return 0.0;
     if(cos_angle <= -1.0) return M_PI;
-	
+
     return acos(cos_angle);
-    
+
 
 }
 
+
+/**
+ * Computes the longitude of the subsolar point from the sun position.
+ * If the sun is perfectly over a pole, then 0 is returned.
+ *
+ * @author Jesse Mapel
+ *
+ * @param sunPosition The body fixed rectangular positon of the sun
+ *
+ * @return @b double The longitude of the subsolar point in -180:180 positive East degrees
+ */
+double SubSolarLongitude(const vector<double> &sunPosition) {
+   double radLon = atan2(sunPosition[1], sunPosition[0]);
+   return 180/M_PI * radLon;
+}
