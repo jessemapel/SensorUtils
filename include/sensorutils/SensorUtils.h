@@ -10,4 +10,8 @@ double LocalSolarTime(const vector<double> &groundPoint, const vector<double> &s
 
 double RectangularToLongitude(const vector<double> &point);
 
+double EmissionAngle(const vector<double>  &observerBodyFixedPosition,
+                     const vector<double> &groundPtIntersection,
+                     const vector<double> &surfaceNormal);
+
 #endif
