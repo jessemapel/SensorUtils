@@ -51,6 +51,54 @@ TEST(SensorUtils, PhaseAngle) {
 
 }
 
+// BEGIN RectangularToLongitude TESTS
+
+TEST(RectangularToLongitude, Meridian) {
+   std::vector<double> point{1.0, 0.0, 0.0};
+   EXPECT_EQ(0, RectangularToLongitude(point));
+}
+
+TEST(RectangularToLongitude, PositiveAngle) {
+   std::vector<double> point{1.0, 1.0, 1.0};
+   EXPECT_EQ(45, RectangularToLongitude(point));
+}
+
+TEST(RectangularToLongitude, NegativeAngle) {
+   std::vector<double> point{-1.0, -1.0, -1.0};
+   EXPECT_EQ(-135, RectangularToLongitude(point));
+}
+
+TEST(RectangularToLongitude, NorthPole) {
+   std::vector<double> point{0.0, 0.0, 1.0};
+   EXPECT_EQ(0, RectangularToLongitude(point));
+}
+
+TEST(RectangularToLongitude, SouthPole) {
+   std::vector<double> point{0.0, 0.0, -1.0};
+   EXPECT_EQ(0, RectangularToLongitude(point));
+}
+
+TEST(RectangularToLongitude, ShortVector) {
+   std::vector<double> point{0.0, 0.0};
+   try {
+      RectangularToLongitude(point);
+   }
+   catch(std::invalid_argument const &err) {
+      EXPECT_EQ(err.what(),
+                std::string("Cannot compute longitude of a point with less than 3 elements"));
+   }
+   catch(...) {
+      FAIL() << "Expected std::invalid_argument";
+   }
+}
+
+// BEGIN SubSolarLongitude TESTS
+
+TEST(SubSolarLongitude, TestPoint) {
+   std::vector<double> sunPosition{1.0, 1.0, 1.0};
+   EXPECT_EQ(45, SubSolarLongitude(sunPosition));
+}
+
 
 int main(int argc, char **argv) {
    ::testing::InitGoogleTest(&argc, argv);
