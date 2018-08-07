@@ -9,4 +9,8 @@ double SubSolarLongitude(const vector<double> &sunPosition);
 
 double RectangularToLongitude(const vector<double> &point);
 
+double EmissionAngle(const vector<double>  &observerBodyFixedPosition,
+                     const vector<double> &groundPtIntersection,
+                     const vector<double> &surfaceNormal);
+
 #endif
