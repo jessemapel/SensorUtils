@@ -12,7 +12,8 @@ requirements:
 
 test:
   commands:
-    - test -e $PREFIX/lib/libsensorutils.so 
+    - test -e $PREFIX/lib/libsensorutils.so  # [linux]
+    - test -e $PREFIX/lib/libsensorutils.dylib  # [osx]
 
 about:
   home: https://github.com/USGS-Astrogeology/SensorUtils
