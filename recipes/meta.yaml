@@ -1,5 +1,5 @@
 package:
-  name: sensorutils
+  name: libsensorutils
   version: "{{ GIT_DESCRIBE_TAG }}.{{ GIT_DESCRIBE_NUMBER }}"
 
 source:
