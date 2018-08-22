@@ -11,8 +11,13 @@ add_executable(runSensorUtilsTests TestMain.cpp
                                    SensorModelTesting.cpp
                                    ShapeModelTesting.cpp)
 
-target_link_libraries(runSensorUtilsTests PUBLIC sensorutils ${GMOCK_LIBRARY} pthread)
-
+target_link_libraries(runSensorUtilsTests PUBLIC 
+                      sensorutils 
+                      ${GMOCK_LIBRARY} 
+                      pthread)
+include_directories(${SENSORUTILS_PRIVATE_INCLUDE_DIRS}
+                    ${SENSORUTILS_PUBLIC_INCLUDE_DIRS}
+                    ${ARMADILLO_INCLUDE_DIR})
 
 if(COVERAGE)
     target_link_libraries(runSensorUtilsTests PRIVATE --coverage)

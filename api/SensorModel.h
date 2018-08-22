@@ -5,19 +5,8 @@
 
 class SensorModel {
 
-
-/**
-*
-*  @brief Pure virtual class for deriving SensorModels using SensorModelFactory
-*  @author 2018-08-13 Tyler Wilson
-*  @internal
-*    @history
-*
-*
-*
-*/
 public:
-
+  virtual ~SensorModel() { };
   virtual CartesianPoint imageToGround(ImagePoint &) =0;
   virtual ImagePoint groundToImage(CartesianPoint &) = 0;
   virtual CartesianVector groundToLook(CartesianPoint & ) = 0;

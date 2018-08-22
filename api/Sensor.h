@@ -5,7 +5,6 @@
 #include <string>
 
 #include "sensorcore.h"
-
 #include "SensorModel.h"
 #include "ShapeModel.h"
 
@@ -13,7 +12,7 @@ class Sensor {
 
   public:
     Sensor(const std::string &metaData, const std::string &sensorName);
-
+    
     double declination(const CartesianVector &);
     double emissionAngle(const CartesianPoint &groundPoint);
     double emissionAngle(const ImagePoint &imagePoint);

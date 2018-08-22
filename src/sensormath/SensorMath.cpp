@@ -3,11 +3,12 @@
 #include <cfloat>
 #include <cmath>
 
+#include <armadillo>
+
 using namespace std;
 using namespace arma;
 
-namespace sensormath {
-
+namespace {
   // cartesian point -> arma::vec
   vec cartesianToVec(CartesianPoint point) {
     return vec {point.x, point.y, point.z}; 
@@ -31,7 +32,10 @@ namespace sensormath {
     return ImagePoint(vec[0], vec[1], vec[2]); 
   }
 
+}
 
+namespace sensormath {
+  
   // Calculates the angle between two vectors
   double angle(CartesianVector ray1, CartesianVector ray2) {
     if (approx_equal(cartesianToVec(ray1), cartesianToVec(ray2),

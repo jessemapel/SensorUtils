@@ -1,21 +1,13 @@
 #ifndef SensorMath_h
 #define SensorMath_h
 
-#include <armadillo>
 #include <vector>
 
 #include "sensorcore.h"
 
 using namespace std; 
-using namespace arma;
 
 namespace sensormath {
-
-  vec cartesianToVec(CartesianPoint point);
-  vec imageToVec(ImagePoint point);
-
-  CartesianVector vecToCartesian(vec vec); 
-  ImagePoint vecToImage(vec vec);
 
   double angle(CartesianVector ray1, CartesianVector ray2); 
   double dot(CartesianVector vector1, CartesianVector vector2);

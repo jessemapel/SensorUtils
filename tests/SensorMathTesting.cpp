@@ -7,50 +7,6 @@
 
 using namespace sensormath; 
 
-TEST(cartesianToVec, point) {
-  CartesianPoint point(1.0, 2.0, 3.0);
-  arma::vec armaPoint = cartesianToVec(point);
-  EXPECT_DOUBLE_EQ(1.0, armaPoint[0]);
-  EXPECT_DOUBLE_EQ(2.0, armaPoint[1]);
-  EXPECT_DOUBLE_EQ(3.0, armaPoint[2]);
-}
-
-
-TEST(cartesianToVec, vec) {
-  CartesianVector point(1.0, 2.0, 3.0);
-  arma::vec armaPoint = cartesianToVec(point);
-  EXPECT_DOUBLE_EQ(1.0, armaPoint[0]);
-  EXPECT_DOUBLE_EQ(2.0, armaPoint[1]);
-  EXPECT_DOUBLE_EQ(3.0, armaPoint[2]);
-}
-
-
-TEST(imageToVec, image) {
-  ImagePoint point(1.0, 2.0, 3.0);
-  arma::vec armaPoint = imageToVec(point);
-  EXPECT_DOUBLE_EQ(1.0, armaPoint[0]);
-  EXPECT_DOUBLE_EQ(2.0, armaPoint[1]);
-  EXPECT_DOUBLE_EQ(3.0, armaPoint[2]);
-}
-
-
-TEST(vecToImage, image) {
-  arma::vec armaPoint{1.0, 2.0, 3.0}; 
-  ImagePoint image = vecToImage(armaPoint); 
-  EXPECT_DOUBLE_EQ(1.0, image.sample);
-  EXPECT_DOUBLE_EQ(2.0, image.line);
-  EXPECT_DOUBLE_EQ(3.0, image.band);
-}
-
-
-TEST(vecToCartesian, vec) {
-  arma::vec armaPoint{1.0, 2.0, 3.0}; 
-  CartesianVector cartesianVec = vecToCartesian(armaPoint);
-  EXPECT_DOUBLE_EQ(1.0, cartesianVec.x);
-  EXPECT_DOUBLE_EQ(2.0, cartesianVec.y);
-  EXPECT_DOUBLE_EQ(3.0, cartesianVec.z);
-}
-
 
 TEST(angle, zero) {
   CartesianVector zero(0.0, 0.0, 0.0);

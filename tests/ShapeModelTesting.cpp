@@ -1,5 +1,6 @@
 #include <memory>
 #include <string>
+#include <cmath>
 
 #include "sensorcore.h"
 #include "SensorMath.h"
@@ -21,7 +22,7 @@ TEST(BiAxialEllipsoid, intersect) {
 TEST(BiAxialEllipsoid, sphereSurfaceNormal) {
   std::unique_ptr<ShapeModel> shape = ShapeModelFactory::create("sphere");
   CartesianVector normal = shape->surfaceNormal(CartesianPoint{-2.0, -2.0, 2.0});
-  EXPECT_DOUBLE_EQ(-1.0/sqrt(3), normal.x);
-  EXPECT_DOUBLE_EQ(-1.0/sqrt(3), normal.y);
-  EXPECT_DOUBLE_EQ(1/sqrt(3), normal.z);
+  EXPECT_DOUBLE_EQ(-1.0/std::sqrt(3), normal.x);
+  EXPECT_DOUBLE_EQ(-1.0/std::sqrt(3), normal.y);
+  EXPECT_DOUBLE_EQ(1/std::sqrt(3), normal.z);
 }

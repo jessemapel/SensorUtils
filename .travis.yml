@@ -9,9 +9,9 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-6
+            - g++-7
       env:
-        - MATRIX_EVAL="CXX=g++-6 && CC=gcc-6"
+        - MATRIX_EVAL="CXX=g++-7 && CC=gcc-7"
     - os: osx
       osx_image: xcode9.4
       env: 
@@ -35,13 +35,14 @@ install:
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - conda install -y -c conda-forge cmake armadillo
+  - conda install -y -c usgs-astrogeology libcsm
   
 script:
   - mkdir build
   - cd build
   - cmake -DCOVERAGE=ON ..
   - cmake --build .
-  - ctest
+  - ctest -VV
 
 after_success:
   - |
