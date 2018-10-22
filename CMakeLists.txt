@@ -13,18 +13,19 @@ set(COVERAGE OFF CACHE BOOL "Coverage")
 find_package(Threads)
 find_package(Armadillo REQUIRED)
 
-find_path(CSM_INCLUDE_DIR NAMES csm.h 
-                          PATH_SUFFIXES csm 
+find_path(CSM_INCLUDE_DIR NAMES csm.h
+                          PATH_SUFFIXES csm
                           PATHS $ENV{CONDA_PREFIX}/include)
+find_library(CSM_LIBRARY csmapi PATHS $ENV{CONDA_PREFIX}/lib)
 
 add_library(sensorutils SHARED
             src/sensorcore/Sensor.cpp
             src/sensormath/SensorMath.cpp
-            src/shapemodel/BiAxialEllipsoid.cpp            
+            src/shapemodel/BiAxialEllipsoid.cpp
             src/shapemodel/ShapeModel.cpp
             src/shapemodel/ShapeModelFactory.cpp
-	        src/sensormodel/CSMSensorModel.cpp
-	        src/sensormodel/SensorModelFactory.cpp)
+	          src/sensormodel/CSMSensorModel.cpp
+	          src/sensormodel/SensorModelFactory.cpp)
 
 if(COVERAGE)
     target_compile_options(sensorutils PRIVATE --coverage -O0)
@@ -53,11 +54,12 @@ target_include_directories(sensorutils
 
 target_link_libraries(sensorutils PUBLIC
                       gtest ${CMAKE_THREAD_LIBS_INIT}
-                      ${ARMADILLO_LIBRARIES})
+                      ${ARMADILLO_LIBRARIES}
+                      ${CSM_LIBRARY})
 
 install(TARGETS sensorutils
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-    
+
 install(DIRECTORY ${SENSORUTILS_INCLUDE_DIRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/sensorutils)
 
 option (BUILD_TESTS "Build tests" ON)

@@ -13,8 +13,8 @@
  *
  * @return std::unique_ptr<ShapeModel> Returns a managed pointer of the created ShapeModel.
  */
-std::unique_ptr<ShapeModel> ShapeModelFactory::create(const std::string &shapeModelName) {
+ShapeModel* ShapeModelFactory::create(const std::string &shapeModelName) {
   double majorAxis = 10.0; // m
   double minorAxis = 10.0; // m
-  return std::unique_ptr<ShapeModel>(new BiAxialEllipsoid(majorAxis, minorAxis));
+  return new BiAxialEllipsoid(majorAxis, minorAxis);
 }

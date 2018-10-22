@@ -9,7 +9,7 @@
 class ShapeModelFactory {
 
   public:
-    static std::unique_ptr<ShapeModel> create(const std::string &shapeModelName);
+    static ShapeModel* create(const std::string &imagePath);
 
   private:
     ShapeModelFactory();

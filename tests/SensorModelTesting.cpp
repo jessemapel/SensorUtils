@@ -1,5 +1,6 @@
 #include <memory>
 #include <string>
+#include <fstream>
 
 #include "sensorcore.h"
 #include "SensorMath.h"
@@ -9,10 +10,10 @@
 #include <gtest/gtest.h>
 
 TEST(CSMSensorModel, groundToLook) {
-  std::unique_ptr<SensorModel> sensor = SensorModelFactory::create("test");
+  SensorModel* sensor = SensorModelFactory::create("data/simpleFramerISD.json");
 
   CartesianPoint groundPoint(0.0, 0.0, 0.0);
-  CartesianVector lookVector = sensor->groundToLook(groundPoint); 
+  CartesianVector lookVector = sensor->groundToLook(groundPoint);
 
   EXPECT_DOUBLE_EQ(0.0, lookVector.x);
   EXPECT_DOUBLE_EQ(0.0, lookVector.y);
@@ -20,11 +21,12 @@ TEST(CSMSensorModel, groundToLook) {
 }
 
 TEST(CSMSensorModel, imageTime) {
-  std::unique_ptr<SensorModel> sensor = SensorModelFactory::create("test");
-  ImagePoint imagePoint(0.0, 0.0, 0.0);
-  double time = sensor->imageTime(imagePoint); 
+  SensorModel* sensor = SensorModelFactory::create("data/simpleFramerISD.json");
 
-  EXPECT_DOUBLE_EQ(0.0, time); 
+  ImagePoint imagePoint(0.0, 0.0, 0.0);
+  double time = sensor->imageTime(imagePoint);
+
+  EXPECT_DOUBLE_EQ(0.0, time);
 }
 
 // TODO: add tests for other methods

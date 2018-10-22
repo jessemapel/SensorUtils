@@ -11,8 +11,8 @@
 #include "SensorModelFactory.h"
 
 Sensor::Sensor(const std::string &metaData, const std::string &sensorName) {
-  m_shapeModel = ShapeModelFactory::create("test");
-  m_sensorModel = SensorModelFactory::create("test"); 
+  m_shapeModel = ShapeModelFactory::create(metaData);
+  m_sensorModel = SensorModelFactory::create(metaData);
 }
 
 
@@ -50,19 +50,19 @@ double Sensor::emissionAngle(const ImagePoint &imagePoint) {
    *
    * @author Kaj Williams
    *
-   * @param groundPoint The point on the body to calculate the phase angle at 
-   *  
+   * @param groundPoint The point on the body to calculate the phase angle at
+   *
    * @return @b double Phase angle, in radians.
    */
 double Sensor::phaseAngle(const CartesianPoint &groundPoint) {
-  CartesianPoint input = groundPoint; 
-  ImagePoint imagePoint = m_sensorModel->groundToImage(input); 
-  CartesianPoint sensorPosition = m_sensorModel->getSensorPosition(imagePoint); 
+  CartesianPoint input = groundPoint;
+  ImagePoint imagePoint = m_sensorModel->groundToImage(input);
+  CartesianPoint sensorPosition = m_sensorModel->getSensorPosition(imagePoint);
   CartesianPoint sunPosition = illuminatorPosition(imagePoint);
 
-  CartesianVector surfaceToObserver = sensormath::subtract(groundPoint, sensorPosition); 
-  CartesianVector surfaceToSun = sensormath::subtract(groundPoint, sunPosition); 
-  // why would we need to normalize? 
+  CartesianVector surfaceToObserver = sensormath::subtract(groundPoint, sensorPosition);
+  CartesianVector surfaceToSun = sensormath::subtract(groundPoint, sunPosition);
+  // why would we need to normalize?
 
   double cos_angle = sensormath::dot(surfaceToObserver, surfaceToSun);
 
@@ -81,21 +81,21 @@ double Sensor::phaseAngle(const CartesianPoint &groundPoint) {
    * the observer (usually the spacecraft) and the vector from the surface intersection
    * point to the illuminator (usually the sun).
    *
-   * @author Kaj Williams 
+   * @author Kaj Williams
    *
-   * @param imagePoint The point on the image to calculate the phaseAngle at. 
-   *  
+   * @param imagePoint The point on the image to calculate the phaseAngle at.
+   *
    * @return @b double Phase angle, in radians.
    */
 double Sensor::phaseAngle(const ImagePoint &imagePoint) {
-  ImagePoint input = imagePoint; 
-  CartesianPoint groundPoint = m_sensorModel->imageToGround(input); 
-  CartesianPoint sensorPosition = m_sensorModel->getSensorPosition(input); 
+  ImagePoint input = imagePoint;
+  CartesianPoint groundPoint = m_sensorModel->imageToGround(input);
+  CartesianPoint sensorPosition = m_sensorModel->getSensorPosition(input);
   CartesianPoint sunPosition = illuminatorPosition(input);
 
-  CartesianVector surfaceToObserver = sensormath::subtract(groundPoint, sensorPosition); 
-  CartesianVector surfaceToSun = sensormath::subtract(groundPoint, sunPosition); 
-  // why would we need to normalize? 
+  CartesianVector surfaceToObserver = sensormath::subtract(groundPoint, sensorPosition);
+  CartesianVector surfaceToSun = sensormath::subtract(groundPoint, sunPosition);
+  // why would we need to normalize?
 
   double cos_angle = sensormath::dot(surfaceToObserver, surfaceToSun);
 
@@ -111,9 +111,9 @@ double Sensor::phaseAngle(const ImagePoint &imagePoint) {
  *
  * @author Jeannie Backer
  *
- * @param CartesianPoint imagePoint The point in the image to calculate the illuminator 
+ * @param CartesianPoint imagePoint The point in the image to calculate the illuminator
  *                                  position at.
- *        
+ *
  * @return The position of the illuminator in body fixed coordinate system.
  */
 CartesianPoint Sensor::illuminatorPosition(ImagePoint imagePoint) {
@@ -121,7 +121,7 @@ CartesianPoint Sensor::illuminatorPosition(ImagePoint imagePoint) {
   // is body fixed ground coordinated (center body to ground point)
   // minus the illumination direction (center sun to ground point)
   CartesianPoint groundPoint = m_sensorModel->imageToGround(imagePoint);
-  CartesianVector illuminatorDirection = m_sensorModel->getIlluminationDirection(groundPoint); 
+  CartesianVector illuminatorDirection = m_sensorModel->getIlluminationDirection(groundPoint);
 
   return sensormath::subtract(illuminatorDirection, groundPoint);
 }

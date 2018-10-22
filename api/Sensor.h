@@ -12,19 +12,19 @@ class Sensor {
 
   public:
     Sensor(const std::string &metaData, const std::string &sensorName);
-    
+
     double declination(const CartesianVector &);
     double emissionAngle(const CartesianPoint &groundPoint);
     double emissionAngle(const ImagePoint &imagePoint);
     double phaseAngle(const CartesianPoint &groundPoint);
     double phaseAngle(const ImagePoint &imagePoint);
     double rightAscension(const CartesianVector &);
-    
-    CartesianPoint illuminatorPosition(ImagePoint imagePoint); 
+
+    CartesianPoint illuminatorPosition(ImagePoint imagePoint);
 
   private:
-    std::unique_ptr<SensorModel> m_sensorModel;
-    std::unique_ptr<ShapeModel> m_shapeModel;
+    SensorModel* m_sensorModel;
+    ShapeModel* m_shapeModel;
 };
 
 #endif
