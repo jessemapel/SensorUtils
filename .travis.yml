@@ -10,11 +10,12 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
+            - gcc-7
       env:
         - MATRIX_EVAL="CXX=g++-7 && CC=gcc-7"
     - os: osx
       osx_image: xcode9.4
-      env: 
+      env:
         - MATRIX_EVAL="CXX=clang++ && CC=clang"
 
 before_install:
@@ -36,7 +37,7 @@ install:
   - export PATH="$HOME/miniconda/bin:$PATH"
   - conda install -y -c conda-forge cmake armadillo
   - conda install -y -c usgs-astrogeology libcsm
-  
+
 script:
   - mkdir build
   - cd build
@@ -54,4 +55,3 @@ after_success:
   - conda config --set anaconda_upload yes
   - conda config --add channels conda-forge
   - conda build --token $CONDA_UPLOAD_TOKEN recipes -q
-
