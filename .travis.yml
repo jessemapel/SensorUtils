@@ -41,6 +41,7 @@ install:
 script:
   - mkdir build
   - cd build
+  - export VERBOSE=1
   - cmake -DCOVERAGE=ON ..
   - cmake --build .
   - ctest -VV
