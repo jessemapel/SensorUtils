@@ -40,7 +40,7 @@ install:
 script:
   - mkdir build
   - cd build
-  - cmake -DCOVERAGE=ON -D_GLIBCXX_USE_CXX11_ABI=0 ..
+  - cmake -DCOVERAGE=ON ..
   - cmake --build .
   - ctest -VV
 
