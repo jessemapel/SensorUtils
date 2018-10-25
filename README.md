@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/USGS-Astrogeology/SensorUtils.svg?branch=master)](https://travis-ci.org/USGS-Astrogeology/SensorUtils)
 [![Coverage Status](https://coveralls.io/repos/github/USGS-Astrogeology/SensorUtils/badge.svg?branch=master)](https://coveralls.io/github/USGS-Astrogeology/SensorUtils?branch=master)
 
+More tests
+
 ## Building
 
 1. Install armadillo
@@ -19,7 +21,7 @@ wget https://sourceforge.net/projects/arma/files/armadillo-8.600.0.tar.xz && \
 tar -xf armadillo-8.600.0.tar.xz && \
 cd armadillo-8.600.0 && \
 cmake -DDETECT_HDF5=false . -DCMAKE_INSTALL_PREFIX=/usr/local && \
-sudo make install 
+sudo make install
 ```
 
 2. `mkdir build && cd build`
