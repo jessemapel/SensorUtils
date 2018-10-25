@@ -2,8 +2,6 @@
 [![Build Status](https://travis-ci.org/USGS-Astrogeology/SensorUtils.svg?branch=master)](https://travis-ci.org/USGS-Astrogeology/SensorUtils)
 [![Coverage Status](https://coveralls.io/repos/github/USGS-Astrogeology/SensorUtils/badge.svg?branch=master)](https://coveralls.io/github/USGS-Astrogeology/SensorUtils?branch=master)
 
-More tests
-
 ## Building
 
 1. Install armadillo
