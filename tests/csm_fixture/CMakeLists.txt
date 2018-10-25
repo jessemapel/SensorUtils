@@ -1,7 +1,3 @@
-
-
-set (CMAKE_CXX_STANDARD 11)
-
 find_path(CSM_INCLUDE_DIR NAMES "csm.h"
             PATH_SUFFIXES "csm"
             PATHS $ENV{CONDA_PREFIX}/include/)
