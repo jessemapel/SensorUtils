@@ -9,6 +9,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}  # [linux]
     - cmake >=3.10
+    - libcsm
     - armadillo
 
 test:
