@@ -11,12 +11,23 @@ set(COVERAGE OFF CACHE BOOL "Coverage")
 
 # Third party dependencies
 find_package(Threads)
-find_package(Armadillo REQUIRED)
+find_package(Armadillo REQUIRED PATHS $ENV{CONDA_PREFIX})
 
-find_path(CSM_INCLUDE_DIR NAMES csm.h
-                          PATH_SUFFIXES csm
-                          PATHS $ENV{CONDA_PREFIX}/include)
-find_library(CSM_LIBRARY csmapi PATHS $ENV{CONDA_PREFIX}/lib)
+# Optional build or link against CSM
+option (BUILD_CSM "Build the CSM library" ON)
+if(BUILD_CSM)
+  add_subdirectory(csm)
+  set(CSM_INCLUDE_DIR /csm)
+  set(CSM_LIBRARY csmapi)
+else()
+  find_path(CSM_INCLUDE_DIR NAMES "csm.h"
+			    PATH_SUFFIXES "csm"
+			    PATHS $ENV{CONDA_PREFIX}/include/)
+  find_library(CSM_LIBRARY csmapi PATHS $ENV{CONDA_PREFIX}/lib)
+
+  message("--Found CSM Library: ${CSM_LIBRARY}")
+  message("--Found CSM Include Directory: ${CSM_INCLUDE_DIR}")
+endif(BUILD_CSM)
 
 add_library(sensorutils SHARED
             src/sensorcore/Sensor.cpp
