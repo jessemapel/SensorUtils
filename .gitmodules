@@ -1,0 +1,3 @@
+[submodule "csm"]
+	path = csm
+	url = git@github.com:USGS-Astrogeology/csm.git
